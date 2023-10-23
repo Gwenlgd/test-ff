@@ -4,17 +4,25 @@ function extractAndDisplayProductInfo() {
 
   arBig.forEach(element => {
     if (!element.dataset.processed) {
-      const productNameElement = element.querySelector('.c-product__name');
-      const productPriceElement = element.querySelector('.c-product__price');
+      const elementsBox = element.getBoundingClientRect();
+      const isOnScreen = (
+        elementsBox.top >= 0 &&
+        elementsBox.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+      );
 
-      if (productNameElement && productPriceElement) {
-        const productName = productNameElement.textContent.trim();
-        const productPrice = productPriceElement.textContent.trim();
+      if (isOnScreen) {
+        const productNameElement = element.querySelector('.c-product__name');
+        const productPriceElement = element.querySelector('.c-product__price');
 
-        console.log('Nom: ' + productName);
-        console.log('Prix: ' + productPrice);
+        if (productNameElement && productPriceElement) {
+          const productName = productNameElement.textContent.trim();
+          const productPrice = productPriceElement.textContent.trim();
 
-        element.dataset.processed = 'true';
+          console.log('Nom: ' + productName);
+          console.log('Prix: ' + productPrice);
+
+          element.dataset.processed = 'true';
+        }
       }
     }
   });
