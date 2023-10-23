@@ -1,3 +1,5 @@
+const displayedProducts = new Set();
+
 function extractAndDisplayProductInfo() {
   const bigProducts = document.getElementsByClassName('c-product');
   const arBig = Array.from(bigProducts);
@@ -10,7 +12,7 @@ function extractAndDisplayProductInfo() {
         elementsBox.bottom <= (window.innerHeight || document.documentElement.clientHeight)
       );
 
-      if (isOnScreen) {
+      if (isOnScreen && !displayedProducts.has(element)) {
         const productNameElement = element.querySelector('.c-product__name');
         const productPriceElement = element.querySelector('.c-product__price');
 
@@ -21,7 +23,7 @@ function extractAndDisplayProductInfo() {
           console.log('Nom: ' + productName);
           console.log('Prix: ' + productPrice);
 
-          element.dataset.processed = 'true';
+          displayedProducts.add(element);
         }
       }
     }
