@@ -1,19 +1,25 @@
-const bigProducts = document.getElementsByClassName('c-product');
-const arBig = Array.from(bigProducts);
+function extractAndDisplayProductInfo() {
+  const bigProducts = document.getElementsByClassName('c-product');
+  const arBig = Array.from(bigProducts);
 
-arBig.forEach(element => {
-  if (!element.dataset.processed) {
-    const productNameElement = element.querySelector('.c-product__name');
-    const productPriceElement = element.querySelector('.c-product__price');
+  arBig.forEach(element => {
+    if (!element.dataset.processed) {
+      const productNameElement = element.querySelector('.c-product__name');
+      const productPriceElement = element.querySelector('.c-product__price');
 
-    if (productNameElement && productPriceElement) {
-      const productName = productNameElement.textContent.trim();
-      const productPrice = productPriceElement.textContent.trim();
+      if (productNameElement && productPriceElement) {
+        const productName = productNameElement.textContent.trim();
+        const productPrice = productPriceElement.textContent.trim();
 
-      console.log('Nom: ' + productName);
-      console.log('Prix: ' + productPrice);
+        console.log('Nom: ' + productName);
+        console.log('Prix: ' + productPrice);
 
-      element.dataset.processed = 'true';
+        element.dataset.processed = 'true';
+      }
     }
-  }
-});
+  });
+}
+
+extractAndDisplayProductInfo();
+
+window.addEventListener('scroll', extractAndDisplayProductInfo);
